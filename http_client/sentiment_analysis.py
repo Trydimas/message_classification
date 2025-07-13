@@ -1,5 +1,6 @@
 import aiohttp
 import aiohttp.client_exceptions
+import json
 
 from config import settings
 from log.log import logger
@@ -18,10 +19,11 @@ class SAClient:
 
     @classmethod
     async def find_out_sentiment(cls, text: str):
-        resp = None
+        result = None
         try:
-            resp = await cls._get_sentiment(text)
+            response = await cls._get_sentiment(text)
+            result = json.loads(response)
         except Exception as e:
             logger.error(f"Something wrong with sentiment request! {e}")
 
-        return resp
+        return result.get("sentiment")

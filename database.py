@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 from config import settings
-from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import DeclarativeBase, class_mapper
 
 engine = create_async_engine(
     url=settings.DB_URL,
@@ -14,7 +14,12 @@ session_fa = async_sessionmaker(
 )
 
 
-Base = declarative_base()
+class Base(DeclarativeBase):
+
+    def as_dict(self):
+        columns = class_mapper(self.__class__).mapped_table.c
+        return {col.name: getattr(self, col.name) for col in columns}
+
 
 async def init_db():
     async with engine.begin() as conn:
@@ -25,4 +30,3 @@ async def init_db():
 async def get_session():
     async with session_fa() as session:
         yield session
-

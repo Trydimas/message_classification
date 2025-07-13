@@ -16,7 +16,7 @@ class Settings(BaseSettings):
 
     @property
     def DB_URL(self):
-        return f'sqllite+aiosqlite://./test.db'
+        return f'sqlite+aiosqlite:///test.db'
 
 
 settings = Settings()

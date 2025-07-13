@@ -3,7 +3,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from models.complaints import ComplaintDB
 from sqlalchemy import select
 
-
 async def create_complaint(session: AsyncSession, body: ComplaintDB):
     session.add(body)
     await session.commit()
