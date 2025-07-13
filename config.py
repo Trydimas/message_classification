@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     AZURE_API_KEY: str
 
     LOG_LEVEL: str = "INFO"
-    LOG_FOLDER: str = "./log"
+    LOG_FOLDER: str = "../log"
 
     @property
     def DB_URL(self):

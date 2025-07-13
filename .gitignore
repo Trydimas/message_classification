@@ -1,5 +1,8 @@
 .venv
-.env
 __pycache__/
 .idea/
 
+.env
+*.db
+*.log
+/test.db
