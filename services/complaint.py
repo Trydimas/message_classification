@@ -4,15 +4,15 @@ from http_client.llm import llm_client
 from http_client.sentiment_analysis import SAClient
 from constants import llm_prompt
 from crud import complaint
-from schema.complaint import ComplaintResp
+from schema.complaint import ComplaintResp, ComplaintMessage
 from models.complaints import ComplaintDB
 from log.log import logger
 
 
-async def get_classification_text(session: AsyncSession, text: str) -> ComplaintResp:
+async def get_classification_text(session: AsyncSession, body: ComplaintMessage) -> ComplaintResp:
     """classifies it first, and then stores it in the database."""
 
-    classify_data = await classify_text(text=text)
+    classify_data = await classify_text(text=body.message)
     saved_data: ComplaintDB = await save_to_db(session=session, body=classify_data)
     return ComplaintResp.model_validate(saved_data.as_dict())
 

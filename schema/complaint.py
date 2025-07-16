@@ -13,3 +13,7 @@ class ComplaintResp(ComplaintBase):
 
     class Config:
         model_config = True
+
+
+class ComplaintMessage(BaseModel):
+    message: str
