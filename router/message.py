@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends
-from services.complaint import get_classification_text
+from services import complaint
 from database import get_session
 from schema.complaint import ComplaintResp
 from sqlalchemy.ext.asyncio import AsyncSession
+from models.complaints import ComplaintDB
 
 router = APIRouter(
     prefix="/message"
@@ -13,7 +14,10 @@ router = APIRouter(
 async def retrieve_message(message: str,
                            session:AsyncSession = Depends(get_session),
                            ) -> ComplaintResp:
-    return await get_classification_text(session=session, text=message)
+    return await complaint.get_classification_text(session=session, text=message)
 
 
-#TODO make end-point for get_list
+
+@router.get("/")
+async def get_all_complaints(session = Depends(get_session)) -> list[ComplaintDB]:
+    return await complaint.get_all_complaints(session)

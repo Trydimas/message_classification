@@ -11,14 +11,14 @@ class SAClient:
     _url = "https://api.apilayer.com/sentiment/analysis"
 
     @classmethod
-    async def _get_sentiment(cls, text: str):
+    async def _get_sentiment(cls, text: str) -> str:
         async with aiohttp.ClientSession() as session:
             async with session.post(url=cls._url, data=text, headers=cls._header, timeout=3) as response:
                 response.raise_for_status()
                 return await response.text()
 
     @classmethod
-    async def find_out_sentiment(cls, text: str):
+    async def find_out_sentiment(cls, text: str) -> str:
         result = None
         try:
             response = await cls._get_sentiment(text)

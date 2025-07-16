@@ -8,8 +8,10 @@ class Settings(BaseSettings):
 
     AZURE_API_VERSION: str
     AZURE_ENDPOINT: str
-    AZURE_MODEL: str
+    AZURE_DEPLOYMENT_NAME: str
     AZURE_API_KEY: str
+    AZURE_MODEL_NAME: str = 'gpt-4o'
+    AZURE_TOKEN_LIMIT: int = 35000
 
     LOG_LEVEL: str = "INFO"
     LOG_FOLDER: str = "../log"
