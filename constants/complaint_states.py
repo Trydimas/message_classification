@@ -16,4 +16,4 @@ class ComplaintSentiment(str, enum.Enum):
     negative = "negative"
     positive = "positive"
     neutral = "neutral"
-    unknown = "Unknown"
+    unknown = "unknown"

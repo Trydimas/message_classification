@@ -12,7 +12,3 @@ class ComplaintDB(Base):
     created_on = Column(DateTime(timezone=True), server_default=func.now())
     sentiment = Column(String, default=ComplaintSentiment.unknown)
     category = Column(String, default=ComplaintCategory.another)
-
-    def as_dict(self):
-        columns = class_mapper(self.__class__).mapped_table.c
-        return {col.name: getattr(self, col.name) for col in columns}

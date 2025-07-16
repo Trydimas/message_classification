@@ -4,6 +4,6 @@ from fastapi.responses import PlainTextResponse
 router = APIRouter()
 
 
-@router.get("")
+@router.get("/")
 async def health_check() -> PlainTextResponse:
     return PlainTextResponse("OK!")
